@@ -7,13 +7,16 @@ PRINT_382050_2: ["T1_EF_no_permohonan"]
 }
  */
 
-PRINTING_FIELD = {
-	PRINT_382050_1: ["T1_EF_no_permohonan"],
-	PRINT_382050_2: ["T1_EF_no_permohonan"]
-};
+if (typeof PRINTING_FIELD === "undefined") {
+	PRINTING_FIELD = {
+		PRINT_382050_1: ["T1_EF_no_permohonan"],
+		PRINT_382050_2: ["T1_EF_no_permohonan"]
+	};
+}
 
 var AppPrintingClass = function () {
 	this.TRIGGER_ID = "printing_trigger";
+	this.API = "/Printing/printAction.do";
 	this.registerTrigger();
 };
 
@@ -23,15 +26,15 @@ AppPrintingClass.prototype.registerTrigger = function () {
 
 	var obj = this;
 	AppUtil.addClassObserver(trigger, function () {
-		
+
 		var className = trigger.className;
-		
+
 		if (className == "NOTHING") {
 			return;
 		}
 		console.log(className);
 		//obj.currentClass = className;
-		
+
 		obj.start(className);
 		trigger.className = "NOTHING";
 
@@ -57,7 +60,7 @@ AppPrintingClass.prototype.start = function (reportName) {
 
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
-	form.setAttribute("action", "http://localhost:8080/Printing/printAction.do");
+	form.setAttribute("action", this.API);
 	form.setAttribute("target", "_blank");
 
 	//set report name
@@ -73,7 +76,6 @@ AppPrintingClass.prototype.start = function (reportName) {
 	document.body.appendChild(form);
 	form.submit();
 	document.body.removeChild(form);
-
 }
 
 var AppPrinting = null;

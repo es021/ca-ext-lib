@@ -10,15 +10,12 @@ var IS_LOCATION = {
 	P38_20501_8: location.pathname.indexOf("P3820501_REGISTER_ADOPTION8.html") >= 0 || IS_TESTING_WZS
 }
 
-
-
 console.log("init constant",location.pathname);
 console.log("IS_LOCATION =>", IS_LOCATION);
 console.log("WINDOW_NAME => ",WINDOW_NAME);
 
 function getWindowName() {
-	var windowName = null;
-
+	var windowName = "UNDEFINED";
 	try {
 		var temp = location.pathname.split(".html");
 		temp = temp[0];

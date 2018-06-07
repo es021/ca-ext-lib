@@ -22,40 +22,44 @@ AppUtilClass.prototype.pxOperation = function (first, oper, second) {
 AppUtilClass.prototype.initAppElement = function (key, val, successHandler) {
 	console.log("initAppElement", key, val);
 	var interval = setInterval(function () {
-			try {
-				var el = null;
-				if (key.toUpperCase() == "ID") {
-					el = document.getElementById(val);
-				}
-				if (el != null && typeof el !== "undefined") {
-					clearInterval(interval);
-					successHandler(el);
-				}
-			} catch (err) {
-				console.log("initAppElement err", err, key, val);
-				clearInterval(interval);
+		try {
+			var el = null;
+			if (key.toUpperCase() == "ID") {
+				el = document.getElementById(val);
 			}
-		}, 500);
+			if (el != null && typeof el !== "undefined") {
+				clearInterval(interval);
+				successHandler(el);
+			}
+		} catch (err) {
+			console.log("initAppElement err", err, key, val);
+			clearInterval(interval);
+		}
+	}, 500);
 }
 
-AppUtilClass.prototype.addClassObserver = function(e, handler) {
+AppUtilClass.prototype.addClassObserver = function (e, handler) {
+	//console.log(e);
+	if(typeof e === "undefined" || e === null){
+		return;
+	}
 	var observer = new MutationObserver(function (event) {
-			handler();
-		})
+		handler();
+	})
 
-		observer.observe(e, {
-			attributes: true,
-			attributeFilter: ['class'],
-			childList: false,
-			characterData: false
-		});
+	observer.observe(e, {
+		attributes: true,
+		attributeFilter: ['class'],
+		childList: false,
+		characterData: false
+	});
 }
 
 AppUtilClass.prototype.recenterApp = function () {
 	var bodyEl = null;
 	var closeEl = null;
 	var appWidth = null;
-	
+
 	this.initAppElement("id", WINDOW_NAME, function (el) {
 		bodyEl = el;
 		finishInitEl();
@@ -97,6 +101,6 @@ AppUtilClass.prototype.recenterApp = function () {
 }
 
 var AppUtil = new AppUtilClass();
-$(document).ready(function(){
+$(document).ready(function () {
 	AppUtil.recenterApp()
 });
