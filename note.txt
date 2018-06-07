@@ -1,0 +1,3 @@
+<script>
+	document.write('<script type="text/javascript" src="/ca-ext-lib/importer.js?v='+((new Date()).getTime())+'"><\/script>');
+</script>
