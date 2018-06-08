@@ -1,7 +1,7 @@
 function initCustomCalendar() {
 	console.log("initCustomCalendar");
 	var calEl = $("input[id^=tarikh]");
-	console.log(calEl);
+	//console.log(calEl);
 	$.each(calEl, function (i,e) {
 		addCalendar(e);
 	});

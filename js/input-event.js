@@ -5,7 +5,9 @@ function customEventHandler() {
 		MANDATORY: "INPUT-MANDATORY",
 		MUSTKEYIN: "INPUT-MUSTKEYIN",
 		TAB_DISABLED: "TAB-DISABLED",
+		TAB_ENABLE: "TAB-ENABLE",
 		BTN_DISABLED: "MENU-BTN-DISABLED",
+		BTN_ENABLE: "MENU-BTN-ENABLE",
 		NAV_BTN_DISABLED: "NAVBTN-DISABLED",
 	};
 
@@ -14,6 +16,7 @@ function customEventHandler() {
 	}
 
 	function inputEventAction(e, className) {
+		//console.log("inputEventAction");
 		//e.removeAttribute("required");
 		e.removeAttribute("disabled");
 
