@@ -1,5 +1,6 @@
 var AppUtilClass = function () {
 	this.BODY = null;
+	this.CLOSE = null;
 }
 AppUtilClass.prototype.pxOperation = function (first, oper, second) {
 	var res = null;
@@ -26,6 +27,15 @@ AppUtilClass.prototype.showLoad = function (body) {
 		this.LOADER.innerHTML = "<i class='fa fa-spinner fa-pulse fa-3x'></i><br>Loading Page";
 		body.appendChild(this.LOADER);
 	}
+	this.LOADER.style.display = "flex";
+	this.LOADER.style.opacity = "1";
+}
+
+AppUtilClass.prototype.closeApp = function () {
+	var mes = "<i class='fa fa-spinner fa-pulse fa-3x'></i>";
+	mes += "<br>Application Has Successfully Exit.";
+	mes += "<br>Please Close Window To Continue";
+	this.LOADER.innerHTML = mes;
 	this.LOADER.style.display = "flex";
 	this.LOADER.style.opacity = "1";
 }
@@ -74,6 +84,15 @@ AppUtilClass.prototype.addClassObserver = function (e, handler) {
 	});
 }
 
+AppUtilClass.prototype.registerEvent = function () {
+	var obj = this;
+
+	this.CLOSE.style.display = "none";
+	// this.CLOSE.addEventListener("click", function () {
+	// 	obj.closeApp();
+	// });
+}
+
 AppUtilClass.prototype.recenterApp = function () {
 	var bodyEl = null;
 	var closeEl = null;
@@ -82,10 +101,12 @@ AppUtilClass.prototype.recenterApp = function () {
 
 	this.initAppElement("id", WINDOW_NAME, function (el) {
 		bodyEl = el;
+		obj.BODY = bodyEl;
 		finishInitEl();
 	});
 	this.initAppElement("id", WINDOW_NAME + "CLOSE", function (el) {
 		closeEl = el;
+		obj.CLOSE = closeEl;
 		finishInitEl();
 	});
 
@@ -97,6 +118,7 @@ AppUtilClass.prototype.recenterApp = function () {
 
 			appWidth = AppUtil.pxOperation(left, "+", width);
 			doRecenter(appWidth);
+			obj.registerEvent();
 		}
 	}
 
@@ -111,8 +133,6 @@ AppUtilClass.prototype.recenterApp = function () {
 			var marginLeft = (windowMax - appWidth) / 2;
 			bodyEl.style.position = "relative";
 			bodyEl.style.marginLeft = marginLeft + "px";
-
-			AppUtil.BODY = bodyEl;
 		} else {
 			obj.hideLoad();
 		}

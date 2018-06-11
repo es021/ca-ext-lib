@@ -67,6 +67,7 @@ function initCustomCalendar() {
 				cInput.style.cursor = "pointer";
 				cInput.style.opacity = "0";
 				cInput.style.left = "0px";
+				cInput.style.top = "0px";
 				cInput.style.width = width + "px";
 
 				var picker = new Pikaday({
