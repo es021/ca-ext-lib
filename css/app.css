@@ -111,7 +111,7 @@ border-color: #545454 !important;
 */
 
 
-buttonid*="TAB"][disabled="disabled"]{
+button[id*="TAB"][disabled="disabled"]{
 color: #999999 !important;
 background-color: #666666 !important;
 cursor: not-allowed !important;

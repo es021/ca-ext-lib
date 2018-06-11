@@ -3,7 +3,7 @@ function loadAll() {
 	var VER = "v2";
 	console.log("initializing importer from " + WAR + " | version " + VER);
 
-	var jsFile = ['jquery.min','pick-a-day', 'constant', 'app', 'calendar','input-event','local-storage','printing'];
+	var jsFile = ['jquery.min','pick-a-day', 'constant', 'app', 'calendar','input-event','local-storage','printing','popup'];
 	var cssFile = ['app'];
 
 	for (var i in jsFile) {

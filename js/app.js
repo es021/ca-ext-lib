@@ -1,6 +1,13 @@
 var AppUtilClass = function () {
 	this.BODY = null;
+
+	var obj = this;
+	this.initAppElement("id", WINDOW_NAME, function (el) {
+		obj.BODY = el;
+	});
 }
+
+
 AppUtilClass.prototype.pxOperation = function (first, oper, second) {
 	var res = null;
 	try {
@@ -41,6 +48,7 @@ AppUtilClass.prototype.initAppElement = function (key, val, successHandler) {
 AppUtilClass.prototype.addClassObserver = function (e, handler) {
 	//console.log(e);
 	if(typeof e === "undefined" || e === null){
+		console.log("undefined in addClassObserver",e);
 		return;
 	}
 	var observer = new MutationObserver(function (event) {
@@ -56,21 +64,17 @@ AppUtilClass.prototype.addClassObserver = function (e, handler) {
 }
 
 AppUtilClass.prototype.recenterApp = function () {
-	var bodyEl = null;
 	var closeEl = null;
 	var appWidth = null;
+	var obj = this;
 
-	this.initAppElement("id", WINDOW_NAME, function (el) {
-		bodyEl = el;
-		finishInitEl();
-	});
 	this.initAppElement("id", WINDOW_NAME + "CLOSE", function (el) {
 		closeEl = el;
 		finishInitEl();
 	});
 
 	function finishInitEl() {
-		if (bodyEl !== null && closeEl !== null) {
+		if (obj.BODY !== null && closeEl !== null) {
 
 			var left = closeEl.style.left;
 			var width = closeEl.style.width;
@@ -88,10 +92,8 @@ AppUtilClass.prototype.recenterApp = function () {
 			}
 
 			var marginLeft = (windowMax - appWidth) / 2;
-			bodyEl.style.position = "relative";
-			bodyEl.style.marginLeft = marginLeft + "px";
-
-			AppUtil.BODY = bodyEl;
+			obj.BODY.style.position = "relative";
+			obj.BODY.style.marginLeft = marginLeft + "px";
 		}
 	}
 
@@ -101,6 +103,7 @@ AppUtilClass.prototype.recenterApp = function () {
 }
 
 var AppUtil = new AppUtilClass();
+console.log(document);
 $(document).ready(function () {
 	AppUtil.recenterApp()
 });

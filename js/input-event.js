@@ -16,7 +16,7 @@ function customEventHandler() {
 	}
 
 	function inputEventAction(e, className) {
-		//console.log("inputEventAction");
+		//console.log("inputEventAction",e);
 		//e.removeAttribute("required");
 		e.removeAttribute("disabled");
 
