@@ -1,10 +1,10 @@
 
-var CustomPopupClass = function (parentEl, closeHandler) {
+var CustomPopupClass = function () {
 	this.TYPE_ERR = "error";
 	this.TYPE_INFO = "info";
 	this.TYPE_SUCCESS = "success";
 
-	this.closeHandler = closeHandler;
+	this.closeHandler = function () { };
 
 	this.elem = document.createElement('div');
 	this.elem.id = "custom-popup";
@@ -32,8 +32,7 @@ var CustomPopupClass = function (parentEl, closeHandler) {
 
 	this.elem.appendChild(this.background);
 	this.elem.appendChild(this.content);
-
-	parentEl.appendChild(this.elem);
+	document.body.appendChild(this.elem);
 
 	this.registerEvent();
 };
@@ -42,7 +41,14 @@ CustomPopupClass.prototype.openPopup = function (title, content, type) {
 	console.log("CustomPopupClass", title, content, type);
 	this.content.className = "cp-" + type;
 	this.header.innerHTML = title;
-	this.body.innerHTML = content;
+
+	if (typeof content === "string") {
+		this.body.innerHTML = content;
+	} else {
+		this.body.innerHTML = "";
+		this.body.appendChild(content);
+	}
+
 	this.elem.style.display = "flex";
 };
 
@@ -63,6 +69,13 @@ CustomPopupClass.prototype.registerEvent = function () {
 		obj.closePopup();
 	});
 };
+
+var CUSTOM_POPUP = null;
+$(document).ready(function () {
+	CUSTOM_POPUP = new CustomPopupClass();
+});
+
+/*
 
 //#############################################################################
 //#############################################################################
@@ -140,7 +153,7 @@ function InitPopupModal() {
 }
 
 $(document).ready(InitPopupModal);
-
+*/
 //#############################################################################
 //#############################################################################
 // Custom Popup - To Replace alert
