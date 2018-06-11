@@ -71,8 +71,8 @@ function customEventHandler() {
 
 $(document).ready(function () {
 
-	$("#RadioButtonGroup1_3").attr("class", "INPUT-PROTECTED");
-	$("#CheckBox1Span").attr("class", "INPUT-PROTECTED");
+	//$("#RadioButtonGroup1_3").attr("class", "INPUT-PROTECTED");
+	//$("#CheckBox1Span").attr("class", "INPUT-PROTECTED");
 
 	setInterval(function () {
 		customEventHandler();
