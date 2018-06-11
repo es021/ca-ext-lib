@@ -2,7 +2,7 @@ function initCustomCalendar() {
 	console.log("initCustomCalendar");
 	var calEl = $("input[id^=tarikh]");
 	//console.log(calEl);
-	$.each(calEl, function (i,e) {
+	$.each(calEl, function (i, e) {
 		addCalendar(e);
 	});
 
@@ -24,13 +24,13 @@ function initCustomCalendar() {
 		addCalendar("tab1_ef_tarikh_permohonan");
 		addCalendar("tab1_ef_tarikh_perintah");
 	}*/
-	 
+
 
 	function addCalendar(el) {
 		try {
 			//var el = document.getElementById(elemId);
 			if (el != null && typeof el !== "undefined") {
-				var isDisabled = el.className.indexOf("DISABLED") >= 0;
+				var isDisabled = el.className.indexOf("DISABLED") >= 0 || el.className.indexOf("PROTECTED") >= 0;
 				// create calendar
 				var width = 20;
 				var left = el.style.left;
@@ -69,44 +69,44 @@ function initCustomCalendar() {
 				cInput.style.width = width + "px";
 
 				var picker = new Pikaday({
-						field: cInput,
-						format: 'D MMM YYYY',
-						onOpen: function () {
-							var top = AppUtil.pxOperation(picker.el.style.top, "-", "9px");
-							var left = AppUtil.pxOperation(picker.el.style.left, "-", AppUtil.BODY.style.marginLeft);
-							picker.el.style.left = (left + 10) + "px";
-							picker.el.style.top = top + "px";
-						},
-						onSelect: function () {
-							var parent = document.getElementById(cInput.getAttribute("parentId"));
-							if (parent != null && typeof parent !== "undefined") {
+					field: cInput,
+					format: 'D MMM YYYY',
+					onOpen: function () {
+						var top = AppUtil.pxOperation(picker.el.style.top, "-", "9px");
+						var left = AppUtil.pxOperation(picker.el.style.left, "-", AppUtil.BODY.style.marginLeft);
+						picker.el.style.left = (left + 10) + "px";
+						picker.el.style.top = top + "px";
+					},
+					onSelect: function () {
+						var parent = document.getElementById(cInput.getAttribute("parentId"));
+						if (parent != null && typeof parent !== "undefined") {
 
-								var isDisabledParent = el.className.indexOf("DISABLED") >= 0;
-								calendar.style.backgroundColor = !isDisabledParent ? "#1549ab" : "rgb(103, 146, 227)";
+							var isDisabledParent = el.className.indexOf("DISABLED") >= 0 || el.className.indexOf("PROTECTED") >= 0;
+							calendar.style.backgroundColor = !isDisabledParent ? "#1549ab" : "rgb(103, 146, 227)";
 
-								if (isDisabledParent) {
-									parent.value = "";
-									return;
-								}
-
-								// generate date
-								var date = this._d;
-								var d = date.getDate();
-								var m = date.getMonth() + 1;
-								var y = date.getFullYear();
-
-								if (m < 10) {
-									m = "0" + m;
-								}
-
-								if (d < 10) {
-									d = "0" + d;
-								}
-
-								parent.value = d + "/" + m + "/" + y;
+							if (isDisabledParent) {
+								parent.value = "";
+								return;
 							}
+
+							// generate date
+							var date = this._d;
+							var d = date.getDate();
+							var m = date.getMonth() + 1;
+							var y = date.getFullYear();
+
+							if (m < 10) {
+								m = "0" + m;
+							}
+
+							if (d < 10) {
+								d = "0" + d;
+							}
+
+							parent.value = d + "/" + m + "/" + y;
 						}
-					});
+					}
+				});
 
 				/*
 				cInput.addEventListener("change", function(){
