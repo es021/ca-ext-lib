@@ -11,10 +11,10 @@
 
 if (typeof PRINTING_FIELD === "undefined") {
 	PRINTING_FIELD = {
-		DUMMY: [],
-		PRINT_382050_1: ["T1_EF_no_permohonan"]
+		DUMMY: []
 	};
 }
+
 var AppPrintingClass = function () {
 	this.TRIGGER_ID = "printing_trigger";
 	//this.API = "/Printing/printAction.do";
@@ -27,7 +27,6 @@ AppPrintingClass.prototype.registerTrigger = function () {
 
 	var obj = this;
 	AppUtil.addClassObserver(trigger, function () {
-		console.log(className);
 		var className = trigger.className;
 		if (className == "") {
 			return;
@@ -35,29 +34,6 @@ AppPrintingClass.prototype.registerTrigger = function () {
 		obj.start(className);
 		trigger.className = "";
 	});
-};
-
-AppPrintingClass.prototype.start = function (reportName) {
-	console.log("Asda");
-	var form = this.getForm(reportName);
-	this.openCustomPopup(reportName);
-	//return;
-	document.body.appendChild(form);
-	this.openPrintPopup(form);
-	document.body.removeChild(form);
-}
-
-AppPrintingClass.prototype.openCustomPopup = function (reportName) {
-	CUSTOM_POPUP.open("aaa","a'sda00");
-	
-};
-
-AppPrintingClass.prototype.openPrintPopup = function (form) {
-	var target = "printingPopup_" + ((new Date()).getTime());
-	var config = "width=500,height=600,left=300,top=100";
-	window.open('about:blank', target, config);
-	form.target = target;
-	form.submit();
 };
 
 AppPrintingClass.prototype.createField = function (name, value, parent) {
@@ -68,7 +44,7 @@ AppPrintingClass.prototype.createField = function (name, value, parent) {
 	parent.appendChild(hiddenField);
 }
 
-AppPrintingClass.prototype.getForm = function (reportName) {
+AppPrintingClass.prototype.start = function (reportName) {
 	var fieldName = PRINTING_FIELD[reportName];
 
 	if (typeof fieldName === "undefined") {
@@ -91,14 +67,23 @@ AppPrintingClass.prototype.getForm = function (reportName) {
 		var fldValue = document.getElementsByName(fld)[0].value;
 		this.createField(fieldName[x], fldValue, form);
 	}
-
-	return form;
+	
+	//submit and open popup
+	document.body.appendChild(form);
+	this.openPrintPopup(form);
+	document.body.removeChild(form);
 }
 
 
+AppPrintingClass.prototype.openPrintPopup = function (form) {
+	var target = "printingPopup_" + ((new Date()).getTime());
+	var config = "width=500,height=600,left=300,top=100";
+	window.open('about:blank', target, config);
+	form.target = target;
+	form.submit();
+};
 
 var AppPrinting = null;
 $(document).ready(function () {
-	console.log("Asd");
 	AppPrinting = new AppPrintingClass();
 });

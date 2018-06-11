@@ -1,10 +1,10 @@
 
-var CustomPopupClass = function () {
+var CustomPopupClass = function (parentEl, closeHandler) {
 	this.TYPE_ERR = "error";
 	this.TYPE_INFO = "info";
 	this.TYPE_SUCCESS = "success";
 
-	this.closeHandler = function () { };
+	this.closeHandler = closeHandler;
 
 	this.elem = document.createElement('div');
 	this.elem.id = "custom-popup";
@@ -33,7 +33,7 @@ var CustomPopupClass = function () {
 	this.elem.appendChild(this.background);
 	this.elem.appendChild(this.content);
 
-	document.body.appendChild(this.elem);
+	parentEl.appendChild(this.elem);
 
 	this.registerEvent();
 };
@@ -64,12 +64,6 @@ CustomPopupClass.prototype.registerEvent = function () {
 	});
 };
 
-var CUSTOM_POPUP = null;
-// $(document).ready(function () {
-// 	CUSTOM_POPUP = new CustomPopupClass();
-// });
-
-/*
 //#############################################################################
 //#############################################################################
 // Custom Popup Modal- Show Content
@@ -146,7 +140,7 @@ function InitPopupModal() {
 }
 
 $(document).ready(InitPopupModal);
-*/
+
 //#############################################################################
 //#############################################################################
 // Custom Popup - To Replace alert

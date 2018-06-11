@@ -1,9 +1,10 @@
 function loadAll() {
 	var WAR = "ca-ext-lib";
 	var VER = "v2";
+	//return;
 	console.log("initializing importer from " + WAR + " | version " + VER);
 
-	var jsFile = ['jquery.min','pick-a-day', 'constant', 'app', 'calendar','input-event','local-storage','printing','popup'];
+	var jsFile = ['jquery.min','pick-a-day', 'constant', 'app', 'calendar','input-event','local-storage','printing'];
 	var cssFile = ['app'];
 
 	for (var i in jsFile) {
