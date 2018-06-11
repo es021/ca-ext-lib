@@ -1,0 +1,11 @@
+<script>
+	PRINTING_FIELD = {
+		PRINT_382050_1: ["T1_EF_no_permohonan"],
+		PRINT_382050_2: ["T1_EF_no_permohonan"]
+	}
+
+	PRINTING_NAME = {
+		PRINT_382050_1: "Laporan 1",
+		PRINT_382050_2: "Laporan 2"
+	};
+</script>
