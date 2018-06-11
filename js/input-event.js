@@ -15,13 +15,31 @@ function customEventHandler() {
 		inputEvent(CUSTOM_CLASS[k]);
 	}
 
+	function getInputChild(e) {
+		var child = $(e).find("input");
+		var type = child.attr("type");
+
+		if (type == "RADIO" || type == "CHECKBOX") {
+			return child;
+		}
+
+		return false;
+	}
+
 	function inputEventAction(e, className) {
-		//console.log("inputEventAction");
-		//e.removeAttribute("required");
+		var inputChild = getInputChild(e);
+		var hasInputChild = inputChild !== false;
+
 		e.removeAttribute("disabled");
+		if (hasInputChild) {
+			inputChild.removeAttr("disabled");
+		}
 
 		if ([CUSTOM_CLASS.DISABLED, CUSTOM_CLASS.PROTECTED, CUSTOM_CLASS.TAB_DISABLED, CUSTOM_CLASS.BTN_DISABLED, CUSTOM_CLASS.NAV_BTN_DISABLED].indexOf(className) >= 0) {
 			e.setAttribute("disabled", "");
+			if (hasInputChild) {
+				inputChild.attr("disabled", "");
+			}
 		} else if ([CUSTOM_CLASS.MANDATORY, CUSTOM_CLASS.MUSTKEYIN].indexOf(className) >= 0) {
 			//e.setAttribute("required", "");
 		}
@@ -39,10 +57,11 @@ function customEventHandler() {
 
 				var e = namedInput[i];
 				inputEventAction(e, className);
-				AppUtil.addClassObserver(e,function(){
+				AppUtil.addClassObserver(e, function () {
 					inputEventAction(e, e.className);
 				});
-	
+
+
 			} catch (err) {
 				console.log(err);
 			}
@@ -51,6 +70,10 @@ function customEventHandler() {
 }
 
 $(document).ready(function () {
+
+	$("#RadioButtonGroup1_3").attr("class", "INPUT-PROTECTED");
+	$("#CheckBox1Span").attr("class", "INPUT-PROTECTED");
+
 	setInterval(function () {
 		customEventHandler();
 	}, 500);

@@ -19,6 +19,25 @@ AppUtilClass.prototype.pxOperation = function (first, oper, second) {
 	return res;
 }
 
+AppUtilClass.prototype.showLoad = function (body) {
+	if (this.LOADER == null) {
+		this.LOADER = document.createElement("div");
+		this.LOADER.setAttribute("id", "custom-app-load");
+		this.LOADER.innerHTML = "<i class='fa fa-spinner fa-pulse fa-3x'></i><br>Loading Page";
+		body.appendChild(this.LOADER);
+	}
+	this.LOADER.style.display = "flex";
+	this.LOADER.style.opacity = "1";
+}
+
+AppUtilClass.prototype.hideLoad = function () {
+	this.LOADER.style.opacity = "0";
+	var obj = this;
+	setTimeout(function () {
+		obj.LOADER.style.display = "none";
+	}, 500);
+}
+
 AppUtilClass.prototype.initAppElement = function (key, val, successHandler) {
 	console.log("initAppElement", key, val);
 	var interval = setInterval(function () {
@@ -40,7 +59,7 @@ AppUtilClass.prototype.initAppElement = function (key, val, successHandler) {
 
 AppUtilClass.prototype.addClassObserver = function (e, handler) {
 	//console.log(e);
-	if(typeof e === "undefined" || e === null){
+	if (typeof e === "undefined" || e === null) {
 		return;
 	}
 	var observer = new MutationObserver(function (event) {
@@ -59,6 +78,7 @@ AppUtilClass.prototype.recenterApp = function () {
 	var bodyEl = null;
 	var closeEl = null;
 	var appWidth = null;
+	var obj = this;
 
 	this.initAppElement("id", WINDOW_NAME, function (el) {
 		bodyEl = el;
@@ -82,6 +102,7 @@ AppUtilClass.prototype.recenterApp = function () {
 
 	function doRecenter(appWidth) {
 		if (appWidth !== null) {
+			obj.hideLoad();
 			var windowMax = window.innerWidth;
 			if (windowMax < appWidth) {
 				return;
@@ -92,6 +113,8 @@ AppUtilClass.prototype.recenterApp = function () {
 			bodyEl.style.marginLeft = marginLeft + "px";
 
 			AppUtil.BODY = bodyEl;
+		} else {
+			obj.hideLoad();
 		}
 	}
 
@@ -102,5 +125,8 @@ AppUtilClass.prototype.recenterApp = function () {
 
 var AppUtil = new AppUtilClass();
 $(document).ready(function () {
+	AppUtil.showLoad(document.body);
 	AppUtil.recenterApp()
 });
+
+

@@ -2,12 +2,18 @@ $ = jQuery;
 var IS_TESTING_WZS = location.pathname.indexOf("wzs21") >= 0;
 var WINDOW_NAME = getWindowName();
 var IS_LOCATION = {
+	// amira
 	P38_50101_1: location.pathname.indexOf("P3850101_TAB1.html") >= 0 || IS_TESTING_WZS,
 	P38_50101_2: location.pathname.indexOf("P3850101_TAB2.html") >= 0 || IS_TESTING_WZS,
 	P38_50101_3: location.pathname.indexOf("P3850101_TAB3.html") >= 0 || IS_TESTING_WZS,
+	
+	// jubli
 	P38_20501_1: location.pathname.indexOf("P3820501_REGISTER_ADOPTION.html") >= 0 || IS_TESTING_WZS,
 	P38_20501_2: location.pathname.indexOf("P3820501_REGISTER_ADOPTION2.html") >= 0 || IS_TESTING_WZS,
-	P38_20501_8: location.pathname.indexOf("P3820501_REGISTER_ADOPTION8.html") >= 0 || IS_TESTING_WZS
+	P38_20501_8: location.pathname.indexOf("P3820501_REGISTER_ADOPTION8.html") >= 0 || IS_TESTING_WZS,
+
+	// moon
+	P38_48501_1: location.pathname.indexOf("P3848501_SERAHAN_SIJIL_TAB1.html") >= 0 || IS_TESTING_WZS,
 }
 
 console.log("init constant",location.pathname);

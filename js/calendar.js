@@ -41,11 +41,12 @@ function initCustomCalendar() {
 				var calendar = document.createElement("span");
 				//calendar.setAttribute("type","date");
 				//calendar.id = el.id + "_calendar";
-				calendar.innerHTML = "C";
+				calendar.innerHTML = "<i class='fa fa-calendar'></i>";
 				calendar.style.backgroundColor = !isDisabled ? "#1549ab" : "rgb(103, 146, 227)";
 				calendar.style.color = "white";
 				calendar.style.fontWeight = "bold";
 				calendar.style.cursor = "pointer";
+				calendar.style.zIndex = "10";
 				calendar.style.width = width + "px";
 				calendar.style.height = el.style.height;
 				calendar.style.position = "absolute";
