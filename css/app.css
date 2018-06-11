@@ -151,7 +151,6 @@ input, select {
 
 .INPUT-MUSTKEYIN, .INPUT-MANDATORY {
     background-color: #ffe0e0 !important;
-    border: 1px solid #e5373 !important;
 }
 
 .INPUT-MUSTKEYIN {
@@ -196,7 +195,6 @@ fieldset[class*="Radio_Button_Group"] {
 span[id*="_rb_"], span[id*="RadioButton"] {
     display: flex;
     align-items: center;
-    margin-left: -15px;
 }
 
 /*###################################*/

@@ -86,7 +86,6 @@ function initCustomCalendar() {
 							calendar.style.backgroundColor = !isDisabledParent ? "#1549ab" : "rgb(103, 146, 227)";
 
 							if (isDisabledParent) {
-								parent.value = "";
 								return;
 							}
 
