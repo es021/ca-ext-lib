@@ -2,6 +2,7 @@ var AppUtilClass = function () {
 	this.BODY = null;
 	this.CLOSE = null;
 }
+
 AppUtilClass.prototype.pxOperation = function (first, oper, second) {
 	var res = null;
 	try {
@@ -119,6 +120,9 @@ AppUtilClass.prototype.recenterApp = function () {
 			appWidth = AppUtil.pxOperation(left, "+", width);
 			doRecenter(appWidth);
 			obj.registerEvent();
+		} else if (bodyEl !== null && closeEl === null) {
+			console.log("failed to recenter app");
+			obj.hideLoad();
 		}
 	}
 
