@@ -5,18 +5,7 @@ function customLocalStorage() {
 	function setLocalStorage() {
 		var tempLS = localStorage.getItem(LS_AUTH);
 		if (tempLS == null || typeof tempLS === "undefined" || tempLS == "{}") {
-			var a = "";
-
-			if (IS_LOCATION.P38_50101_1) {
-				a = `{"login_time":1526865746,"authenticated":true,"user":{"BRANCH_CODE":"16011011","PC_ID":"031","OPER_ID":"AMIRA"}}`;
-			}
-			else if (IS_LOCATION.P38_20501_1) {
-				a = `{"login_time":1526865746,"authenticated":true,"user":{"BRANCH_CODE":"16011011","PC_ID":"031","OPER_ID":"JUBLI"}}`;
-			}
-			else {
-				a = `{"login_time":1526865746,"authenticated":true,"user":{"BRANCH_CODE":"16011011","PC_ID":"021","OPER_ID":"MOON"}}`;
-			}
-
+			var a = `{"login_time":1526865746,"authenticated":true,"user":{"BRANCH_CODE":"16011011","PC_ID":"031","OPER_ID":"TEST"}}`;
 			localStorage.setItem(LS_AUTH, a);
 		}
 	}

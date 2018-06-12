@@ -100,23 +100,22 @@ AppUtilClass.prototype.recenterApp = function () {
 	var appWidth = null;
 	var obj = this;
 
-	this.initAppElement("id", WINDOW_NAME, function (el) {
-		bodyEl = el;
-		obj.BODY = bodyEl;
-		finishInitEl();
-	});
 	this.initAppElement("id", WINDOW_NAME + "CLOSE", function (el) {
 		closeEl = el;
 		obj.CLOSE = closeEl;
 		finishInitEl();
 	});
 
+	this.initAppElement("id", WINDOW_NAME, function (el) {
+		bodyEl = el;
+		obj.BODY = bodyEl;
+		finishInitEl();
+	});
+
 	function finishInitEl() {
 		if (bodyEl !== null && closeEl !== null) {
-
 			var left = closeEl.style.left;
 			var width = closeEl.style.width;
-
 			appWidth = AppUtil.pxOperation(left, "+", width);
 			doRecenter(appWidth);
 			obj.registerEvent();
