@@ -16,6 +16,7 @@
 
 if (typeof PRINTING_FIELD === "undefined") {
 	PRINTING_FIELD = {
+		385010: ["no_permohonan_pemilik"],
 		PRINT_382050_1: ["T1_EF_no_permohonan"],
 		PRINT_382050_2: ["T1_EF_no_permohonan"]
 	};
@@ -23,14 +24,15 @@ if (typeof PRINTING_FIELD === "undefined") {
 
 if (typeof PRINTING_NAME === "undefined") {
 	PRINTING_NAME = {
-		PRINT_382050_1: "Laporan 1" ,
+		385010: "Laporan 385010",
+		PRINT_382050_1: "Laporan 1",
 		PRINT_382050_2: "Laporan 2"
 	};
 }
 
 var AppPrintingClass = function () {
 	this.TRIGGER_ID = "printing_trigger";
-	this.API = "/Printing/printAction.do";
+	this.URL = "/home-webservice/print/action";
 	this.registerTrigger();
 };
 
@@ -49,13 +51,6 @@ AppPrintingClass.prototype.registerTrigger = function () {
 	});
 };
 
-AppPrintingClass.prototype.createField = function (name, value, parent) {
-	var hiddenField = document.createElement("input");
-	hiddenField.setAttribute("type", "hidden");
-	hiddenField.setAttribute("name", name);
-	hiddenField.setAttribute("value", value);
-	parent.appendChild(hiddenField);
-};
 
 AppPrintingClass.prototype.start = function () {
 	this.openCustomPopup();
@@ -85,6 +80,16 @@ AppPrintingClass.prototype.openCustomPopup = function () {
 	CUSTOM_POPUP.openPopup("CETAKAN", popupBody, "info");
 };
 
+AppPrintingClass.prototype.createUrl = function (reportName, reportData) {
+	var url = null;
+	try {
+		url = this.URL + "?ReportName=" + reportName + "&ReportData=" + window.encodeURI(JSON.stringify(reportData));
+	} catch (err) {
+		console.log("AppPrintingClass.prototype.createUrl", err);
+	}
+	return url;
+}
+
 AppPrintingClass.prototype.openPrintPopup = function (reportId) {
 	var fieldNames = PRINTING_FIELD[reportId];
 
@@ -92,37 +97,80 @@ AppPrintingClass.prototype.openPrintPopup = function (reportId) {
 		alert("Invalid printing report name '" + reportId + "'. Data for this report printing is not specified.");
 		return null;
 	}
-	var form = this.getForm(reportId, fieldNames);
-	console.log(form);
-	if (form !== null) {
-		document.body.appendChild(form);
-		var target = "printingPopup_" + ((new Date()).getTime());
-		var config = "width=500,height=600,left=300,top=100";
-		window.open('about:blank', target, config);
-		form.target = target;
-		form.submit();
+	var reportData = this.getReportData(fieldNames);
+	console.log(reportData);
 
-		document.body.removeChild(form);
-	}
+	var target = "printingPopup_" + ((new Date()).getTime());
+	var config = "width=" + screen.width + ",height=" + screen.height + ",left=300,top=100";
+	var url = this.createUrl(reportId, reportData);
+	window.open(url, target, config);
+
 };
 
-AppPrintingClass.prototype.getForm = function (reportId, fieldNames) {
-	var form = document.createElement("form");
-	form.setAttribute("method", "post");
-	form.setAttribute("action", this.API);
-
-	//set report name
-	this.createField("ReportName", reportId, form);
-
-	//set the rest of the field
+AppPrintingClass.prototype.getReportData = function (fieldNames) {
+	var data = {};
 	for (var x in fieldNames) {
 		var fld = fieldNames[x].toString();
-		var fldValue = document.getElementsByName(fld)[0].value;
-		this.createField(fieldNames[x], fldValue, form);
+		var el = document.getElementsByName(fld)[0];
+		if (typeof el === "undefined") {
+			console.log("Field Not Found => " + fld);
+			continue;
+		}
+		var fldValue = el.value;
+		data[fld] = fldValue;
 	}
 
-	return form;
+	return data;
 }
+
+
+// AppPrintingClass.prototype.createField = function (name, value, parent) {
+// 	var hiddenField = document.createElement("input");
+// 	hiddenField.setAttribute("type", "hidden");
+// 	hiddenField.setAttribute("name", name);
+// 	hiddenField.setAttribute("value", value);
+// 	parent.appendChild(hiddenField);
+// };
+
+// AppPrintingClass.prototype.openPrintPopup = function (reportId) {
+// 	var fieldNames = PRINTING_FIELD[reportId];
+
+// 	if (typeof fieldNames === "undefined") {
+// 		alert("Invalid printing report name '" + reportId + "'. Data for this report printing is not specified.");
+// 		return null;
+// 	}
+// 	var form = this.getForm(reportId, fieldNames);
+// 	console.log(form);
+// 	if (form !== null) {
+// 		document.body.appendChild(form);
+// 		var target = "printingPopup_" + ((new Date()).getTime());
+// 		var config = "width=500,height=600,left=300,top=100";
+// 		window.open('about:blank', target, config);
+// 		form.target = target;
+// 		form.submit();
+
+// 		document.body.removeChild(form);
+// 	}
+// };
+
+
+// AppPrintingClass.prototype.getForm = function (reportId, fieldNames) {
+// 	var form = document.createElement("form");
+// 	form.setAttribute("method", "post");
+// 	form.setAttribute("action", this.API);
+
+// 	//set report name
+// 	this.createField("ReportName", reportId, form);
+
+// 	//set the rest of the field
+// 	for (var x in fieldNames) {
+// 		var fld = fieldNames[x].toString();
+// 		var fldValue = document.getElementsByName(fld)[0].value;
+// 		this.createField(fieldNames[x], fldValue, form);
+// 	}
+
+// 	return form;
+// }
 
 var AppPrinting = null;
 $(document).ready(function () {
