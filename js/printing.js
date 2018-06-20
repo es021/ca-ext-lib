@@ -16,7 +16,7 @@
 
 if (typeof PRINTING_FIELD === "undefined") {
 	PRINTING_FIELD = {
-		385010: ["no_permohonan_pemilik"],
+		385010: ["no_permohonan_urusniaga"],
 		PRINT_382050_1: ["T1_EF_no_permohonan"],
 		PRINT_382050_2: ["T1_EF_no_permohonan"]
 	};
@@ -175,4 +175,8 @@ AppPrintingClass.prototype.getReportData = function (fieldNames) {
 var AppPrinting = null;
 $(document).ready(function () {
 	AppPrinting = new AppPrintingClass();
+
+	// setTimeout(function () {
+	// 	AppPrinting.openPrintPopup("385010");
+	// }, 1000)
 });
