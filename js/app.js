@@ -74,7 +74,7 @@ AppUtilClass.prototype.addClassObserver = function (e, handler) {
 		return;
 	}
 	var observer = new MutationObserver(function (event) {
-		handler();
+		handler(e);
 	})
 
 	observer.observe(e, {

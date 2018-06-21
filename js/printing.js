@@ -43,18 +43,18 @@ AppPrintingClass.prototype.registerTrigger = function () {
 	trigger = trigger[0];
 
 	var obj = this;
-	AppUtil.addClassObserver(trigger, function () {
-		var className = trigger.className;
+	AppUtil.addClassObserver(trigger, function (el) {
+		var className = el.className;
 		if (className == "") {
 			return;
 		}
 		obj.start(className);
-		trigger.className = "";
+		el.className = "";
 	});
 };
 
 AppPrintingClass.prototype.start = function () {
-	this.openCustomPopup(printingArr);
+	this.openCustomPopup();
 };
 
 AppPrintingClass.prototype.openCustomPopup = function () {

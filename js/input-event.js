@@ -9,6 +9,7 @@ function customEventHandler() {
 		BTN_DISABLED: "MENU-BTN-DISABLED",
 		BTN_ENABLE: "MENU-BTN-ENABLE",
 		NAV_BTN_DISABLED: "NAVBTN-DISABLED",
+		NAV_BTN_ENABLED: "NAVBTN-ENABLE"
 	};
 
 	for (var k in CUSTOM_CLASS) {
@@ -57,9 +58,10 @@ function customEventHandler() {
 
 				var e = namedInput[i];
 				inputEventAction(e, className);
-				AppUtil.addClassObserver(e, function () {
-					inputEventAction(e, e.className);
-				});
+				// AppUtil.addClassObserver(e, function (el) {
+				// 	//console.log("hey there",el.id);
+				// 	inputEventAction(el, el.className);
+				// });
 
 			} catch (err) {
 				console.log(err);
@@ -71,10 +73,10 @@ function customEventHandler() {
 $(document).ready(function () {
 	//$("#RadioButtonGroup1_3").attr("class", "INPUT-PROTECTED");
 	//$("#CheckBox1Span").attr("class", "INPUT-PROTECTED");
-	customEventHandler();
+	// customEventHandler();
 
-	return;
-	// setInterval(function () {
-	// 	customEventHandler();
-	// }, 100);
+	// return;
+	setInterval(function () {
+		customEventHandler();
+	}, 100);
 });
