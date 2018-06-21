@@ -61,7 +61,6 @@ function customEventHandler() {
 					inputEventAction(e, e.className);
 				});
 
-
 			} catch (err) {
 				console.log(err);
 			}
@@ -70,11 +69,12 @@ function customEventHandler() {
 }
 
 $(document).ready(function () {
-
 	//$("#RadioButtonGroup1_3").attr("class", "INPUT-PROTECTED");
 	//$("#CheckBox1Span").attr("class", "INPUT-PROTECTED");
+	customEventHandler();
 
-	setInterval(function () {
-		customEventHandler();
-	}, 500);
+	return;
+	// setInterval(function () {
+	// 	customEventHandler();
+	// }, 100);
 });

@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <script>
+        document.write('<script type="text/javascript" src="/ca-ext-lib/importer.js?v=' + ((new Date()).getTime()) + '"><\/script>');
+    </script>
+    <script>
+        PRINTING_FIELD = {
+            385010: ["T1_EF_no_permohonan","",""],
+            PRINT_382050_2: ["T1_EF_no_permohonan"]
+        }
+
+        PRINTING_NAME = {
+            385010: "Laporan 1",
+            PRINT_382050_2: "Laporan 2"
+        };
+
+        setTimeout(function () {
+		    AppPrinting.openCustomPopup();
+	    }, 1000)
+    </script>
+</head>
+
+<body>
+<h4>Test Page For LIB</h4>
+<input name="T1_EF_no_permohonan" value="lalala"/>
+<input id="printing_name" name="" value="PRINT_382050_2,385010"/>
+
+<button id="printing_button" value="lalala">Cetak</button>
+</body>
+
+</html>

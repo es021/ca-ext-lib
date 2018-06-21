@@ -1,6 +1,6 @@
 function customLocalStorage() {
 	var LS_AUTH = "JPN-LOCAL-STORAGE-AUTH";
-	var INTERVAL_TIME = 500;
+	var INTERVAL_TIME = 100;
 
 	function setLocalStorage() {
 		var tempLS = localStorage.getItem(LS_AUTH);
@@ -88,9 +88,7 @@ function customLocalStorage() {
 	var cawanganSelectIndex = null;
 	function setPejabatPendaftaran(elemId, cawangan) {
 		console.log("setPejabatPendaftaran", elemId, cawangan);
-
 		var interval = setInterval(function () {
-
 			try {
 				var el = document.getElementById(elemId);
 				if (el != null && typeof el !== "undefined") {
