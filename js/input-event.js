@@ -9,7 +9,8 @@ function customEventHandler() {
 		BTN_DISABLED: "MENU-BTN-DISABLED",
 		BTN_ENABLE: "MENU-BTN-ENABLE",
 		NAV_BTN_DISABLED: "NAVBTN-DISABLED",
-		NAV_BTN_ENABLED: "NAVBTN-ENABLE"
+		NAV_BTN_ENABLED: "NAVBTN-ENABLED",
+		NAV_BTN_ENABLE: "NAVBTN-ENABLE"
 	};
 
 	for (var k in CUSTOM_CLASS) {
@@ -58,6 +59,7 @@ function customEventHandler() {
 
 				var e = namedInput[i];
 				inputEventAction(e, className);
+				
 				// AppUtil.addClassObserver(e, function (el) {
 				// 	//console.log("hey there",el.id);
 				// 	inputEventAction(el, el.className);

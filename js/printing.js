@@ -45,6 +45,8 @@ AppPrintingClass.prototype.registerTrigger = function () {
 	var obj = this;
 	AppUtil.addClassObserver(trigger, function (el) {
 		var className = el.className;
+		// console.log(el);
+		// console.log(className);
 		if (className == "") {
 			return;
 		}
@@ -65,7 +67,7 @@ AppPrintingClass.prototype.openCustomPopup = function () {
 	var br = document.createElement('br');
 	var obj = this;
 	for (var i in PRINTING_FIELD) {
-		
+
 		if (printingNameArr !== null && typeof printingNameArr !== "undefined") {
 			if (printingNameArr.indexOf(i) <= -1) {
 				continue;
@@ -90,6 +92,26 @@ AppPrintingClass.prototype.openCustomPopup = function () {
 		popupBody.appendChild(btn);
 	}
 
+	// add keluar button
+	// popupBody.appendChild(document.createElement('br'));
+	// popupBody.appendChild(document.createElement('br'));
+	// var btnKeluar = document.createElement('button');
+	// btnKeluar.setAttribute("id", "PB_btn_in_keluar");
+	// btnKeluar.setAttribute("class", "btn-red");
+	// btnKeluar.innerHTML = "Keluar";
+	// btnKeluar.style.padding = "10px 20px";
+	// btnKeluar.style.marginBottom = "10px";
+	// popupBody.appendChild(btnKeluar);
+
+	// btnKeluar.addEventListener("click", function () {
+	// 	var cl = confirm("Keluar Dari Transaksi. Anda Pasti?");
+	// 	if(cl){
+	// 		window.close();
+	// 	}
+	// });
+
+	// init popup
+	CUSTOM_POPUP.setCloseable(true);
 	CUSTOM_POPUP.openPopup("CETAKAN", popupBody, "info");
 };
 

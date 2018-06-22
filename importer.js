@@ -1,6 +1,6 @@
 function loadAll() {
 	var WAR = "ca-ext-lib";
-	var VER = "v3";
+	var VER = "vDemo";
 	//return;
 	console.log("initializing importer from " + WAR + " | version " + VER);
 

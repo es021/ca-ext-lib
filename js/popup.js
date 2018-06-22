@@ -4,6 +4,8 @@ var CustomPopupClass = function () {
 	this.TYPE_INFO = "info";
 	this.TYPE_SUCCESS = "success";
 
+	this.closeable = true;
+
 	this.closeHandler = function () { };
 
 	this.elem = document.createElement('div');
@@ -37,7 +39,19 @@ var CustomPopupClass = function () {
 	this.registerEvent();
 };
 
+
+CustomPopupClass.prototype.setCloseable = function (closeable) {
+	this.closeable = closeable;
+}
+
 CustomPopupClass.prototype.openPopup = function (title, content, type) {
+
+	if (!this.closeable) {
+		this.close.style.opacity = 0;
+	} else {
+		this.close.style.opacity = 1;
+	}
+
 	console.log("CustomPopupClass", title, content, type);
 	this.content.className = "cp-" + type;
 	this.header.innerHTML = title;
@@ -53,6 +67,10 @@ CustomPopupClass.prototype.openPopup = function (title, content, type) {
 };
 
 CustomPopupClass.prototype.closePopup = function () {
+	if (!this.closeable) {
+		return;
+	}
+
 	this.elem.style.display = "none";
 	this.closeHandler();
 }
@@ -65,7 +83,7 @@ CustomPopupClass.prototype.registerEvent = function () {
 	});
 
 	this.background.addEventListener("click", function () {
-		console.log("here");
+		//console.log("here");
 		obj.closePopup();
 	});
 };

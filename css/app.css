@@ -62,6 +62,19 @@ button[id*="PB_"]:active {
 
 /*###################################*/
 
+/* class override */
+button[id*="PB_"].btn-red{
+    border: 1px solid #cb2f2f  !important;
+    background-color: #ec0c0c  !important;
+}
+
+button[id*="PB_"].btn-red:hover {
+    background-color: white !important;
+    color: #ec0c0c  !important;
+}
+
+/*###################################*/
+
 /*override tab color */
 
 button[id*="TAB"] {
